@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <!--<link rel='stylesheet' href='/stylesheets/style.css' />-->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1><%= title %></h1>
+                <small>重度科幻迷</small>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand">重度科幻迷</a>
+            </div>
+            <p class="navbar-text navbar-right">
+                <% if (user) { %>
+                    <span>欢迎您，<%= user.name %></span>
+                    <span>&nbsp;|&nbsp;</span>
+                    <a href="/logout">登出</a>
+                <% } else { %>
+                    <a href="#" class="navbar-link" data-toggle="modal" data-target="#signupModal">注册</a>
+                    <span>&nbsp;|&nbsp;</span>
+                    <a href="#" class="navbar-link" data-toggle="modal" data-target="#signinModal">登录</a>
+                <% } %>
+            </p>
+        </div>
+    </div>
+    <div id="signupModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/user/signup" method="POST">
+                    <div class="modal-header">注册</div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="signupName"></label>
+                            <input type="text" id="signupName" class="form-control" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword"></label>
+                            <input type="text" id="signupPassword" class="form-control" name="password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" data-dismiss="modal">关闭</button>
+                        <button class="btn btn-success" type="submit">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="signinModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/user/signin" method="POST">
+                    <div class="modal-header">登录</div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="signinName"></label>
+                            <input type="text" id="signinName" class="form-control" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="signinPassword"></label>
+                            <input type="text" id="signinPassword" class="form-control" name="password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" data-dismiss="modal">关闭</button>
+                        <button class="btn btn-success" type="submit">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <% movies.forEach(function (item) { %>
+                <div class="col-md-2">
+                    <div class="thumbnail">
+                        <a href="/movie/<%= item._id %>">
+                            <img src="<%= item.poster %>" alt="<%= item.title %>">
+                        </a>
+                        <div class="caption">
+                            <h3><%= item.title %></h3>
+                            <p>
+                                <a href="/movie/<%= item._id %>" class="btn btn-primary" role="button">观看预告片</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</body>
+</html>

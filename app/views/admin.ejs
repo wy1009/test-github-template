@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <!--<link rel='stylesheet' href='/stylesheets/style.css' />-->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1><%= title %></h1>
+                <small>重度科幻迷</small>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand">重度科幻迷</a>
+            </div>
+            <p class="navbar-text navbar-right">
+                <% if (user) { %>
+                    <span>欢迎您，<%= user.name %></span>
+                    <span>&nbsp;|&nbsp;</span>
+                    <a href="/logout">登出</a>
+                <% } else { %>
+                    <a href="#" class="navbar-link" data-toggle="modal" data-target="#signupModal">注册</a>
+                    <span>&nbsp;|&nbsp;</span>
+                    <a href="#" class="navbar-link" data-toggle="modal" data-target="#signinModal">登录</a>
+                <% } %>
+            </p>
+        </div>
+    </div>
+    <div id="signupModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/user/signup" method="POST">
+                    <div class="modal-header">注册</div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="signupName"></label>
+                            <input type="text" id="signupName" class="form-control" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword"></label>
+                            <input type="text" id="signupPassword" class="form-control" name="password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" data-dismiss="modal">关闭</button>
+                        <button class="btn btn-success" type="submit">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="signinModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/user/signin" method="POST">
+                    <div class="modal-header">登录</div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="signinName"></label>
+                            <input type="text" id="signinName" class="form-control" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="signinPassword"></label>
+                            <input type="text" id="signinPassword" class="form-control" name="password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" data-dismiss="modal">关闭</button>
+                        <button class="btn btn-success" type="submit">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <form action="/admin/movie" class="form-horizontal" method="post">
+                <input type="hidden" name="_id" value="<%= movie._id %>">
+                <div class="form-group">
+                    <label for="inputTitle" class="col-sm-3 control-label">名字</label>
+                    <div class="col-sm-10"><input type="text" id="inputTitle" class="form-control" value="<%= movie.title %>" name="title"></div>
+                </div>
+                <div class="form-group">
+                    <label for="inputDoctor" class="col-sm-3 control-label">导演</label>
+                    <div class="col-sm-10"><input type="text" id="inputDoctor" class="form-control" value="<%= movie.doctor %>" name="doctor"></div>
+                </div>
+                <div class="form-group">
+                    <label for="inputCountry" class="col-sm-3 control-label">国家</label>
+                    <div class="col-sm-10"><input type="text" id="inputCountry" class="form-control" value="<%= movie.country %>" name="country"></div>
+                </div>
+                <div class="form-group">
+                    <label for="inputLanguage" class="col-sm-3 control-label">语种</label>
+                    <div class="col-sm-10"><input type="text" id="inputLanguage" class="form-control" value="<%= movie.language %>" name="language"></div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPoster" class="col-sm-3 control-label">海报地址</label>
+                    <div class="col-sm-10"><input type="text" id="inputPoster" class="form-control" value="<%= movie.poster %>" name="poster"></div>
+                </div>
+                <div class="form-group">
+                    <label for="inputFlash" class="col-sm-3 control-label">片源地址</label>
+                    <div class="col-sm-10"><input type="text" id="inputFlash" class="form-control" value="<%= movie.flash %>" name="flash"></div>
+                </div>
+                <div class="form-group">
+                    <label for="inputYear" class="col-sm-3 control-label">上映年代</label>
+                    <div class="col-sm-10"><input type="text" id="inputYear" class="form-control" value="<%= movie.year %>" name="year"></div>
+                </div>
+                <div class="form-group">
+                    <label for="inputSummary" class="col-sm-3 control-label">简介</label>
+                    <div class="col-sm-10"><input type="text" id="inputSummary" class="form-control" value="<%= movie.summary %>" name="summary"></div>
+                </div>
+                <button class="btn btn-primary">录入</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
